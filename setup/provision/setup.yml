@@ -1,0 +1,9 @@
+- hosts: all
+  become: yes
+  vars:
+    - hyperledger: /opt/gopath/src/github.com/hyperledger
+    - fabric: "{{ hyperledger }}/fabric"
+  vars_files:
+    - service/fabric/config.yml
+  tasks:
+    - import_tasks: service/fabric/setup.yml 

@@ -1,0 +1,18 @@
+- file:
+    path: "{{ hyperledger }}"
+    state: directory
+
+- git:
+    repo: https://github.com/hyperledger/fabric-ca.git
+    dest: "{{ fabric_ca }}"
+    version: "{{ hf_version }}"
+
+- name: check if hyperledger fabric-ca exists
+  stat:
+    path: "{{ fabric_ca }}"
+  register: exists_fabric_ca
+
+- make:
+    chdir: "{{ fabric_ca }}"
+    target: docker
+  when: exists_fabric_ca.stat.exists

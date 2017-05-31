@@ -1,0 +1,31 @@
+- file: 
+    path: "{{ hyperledger }}"
+    state: directory
+
+- stat:
+    path: "{{ fabric }}"
+  register: check_setup_enable
+
+- git: 
+    repo: https://github.com/hyperledger/fabric.git
+    dest: "{{ fabric }}"
+    version: "{{ hf_version }}"
+
+- file:
+    src: "{{ fabric }}"
+    dest: /hyperledger
+    state: link
+
+- stat:
+    path: "{{ fabric }}"
+  register: check_fabric_exists
+
+- command: ./setup.sh
+  args:
+    chdir: "{{ fabric }}/devenv"
+  when: check_setup_enable.stat.exists == false and check_fabric_exists.stat.exists == true
+
+- name: add ubuntu user to docker group
+  user:
+      name: ubuntu
+      group: docker

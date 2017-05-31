@@ -1,0 +1,9 @@
+- name: check if hyperledger fabirc exists
+  stat: 
+    path: "{{ fabric }}"
+  register: exists_fabric
+
+- make:
+    chdir: "{{ fabric }}"
+    target: docker
+  when: exists_fabric.stat.exists
