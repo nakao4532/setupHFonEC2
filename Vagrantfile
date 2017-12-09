@@ -53,6 +53,11 @@ Vagrant.configure("2") do |config|
       }
       override.vm.hostname = "org1"
     end
+
+    # unique provision
+    org0.vm.provision "launch", type: 'ansible_local' do |ansible|
+      ansible.playbook = "launch/fabric-ca-samples.yml"
+    end
   end
 
 end

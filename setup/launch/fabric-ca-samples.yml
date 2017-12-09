@@ -1,0 +1,9 @@
+- hosts: all
+  vars:
+    - download: "{{ lookup('ENV', 'HOME') }}/fabric-samples"
+  tasks:
+    - name: download sample structure from github
+      git:
+       repo: https://github.com/nakao4532/fabric-samples.git
+       dest: "{{ download }}"
+       version: master
