@@ -3,6 +3,24 @@
     path: "{{ fabric }}"
   register: exists_fabric
 
+- name: patch zookeeper
+  command: git cherry-pick 21234b6836c0fb98b2ac3e700bbc85fb77975b33
+  args:
+    chdir: "{{ fabric }}"
+  when: exists_fabric.stat.exists
+
+- name: patch kafka
+  command: git cherry-pick 34882dd2b3cba149f7708c6ffe55bb91d3840e4c
+  args:
+    chdir: "{{ fabric }}"
+  when: exists_fabric.stat.exists
+
+- name: patch kafka
+  command: git cherry-pick 4747235991272c265a0fb7aa861961c94e1514c6
+  args:
+    chdir: "{{ fabric }}"
+  when: exists_fabric.stat.exists
+
 - make:
     chdir: "{{ fabric }}"
     target: docker
