@@ -4,6 +4,6 @@
   tasks:
     - name: download sample structure from github
       git:
-       repo: https://github.com/nakao4532/fabric-samples.git
+       repo: https://github.com/hyperledger/fabric-samples.git
        dest: "{{ download }}"
        version: master

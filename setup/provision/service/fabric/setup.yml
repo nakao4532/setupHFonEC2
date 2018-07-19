@@ -12,7 +12,7 @@
     version: "{{ hf_version }}"
 
 - file:
-    src: "{{ fabric }}"
+    src: "{{ hyperledger }}"
     dest: /hyperledger
     state: link
 
